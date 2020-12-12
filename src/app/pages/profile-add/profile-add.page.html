@@ -1,0 +1,132 @@
+
+<ion-content>
+  <div class="holder">
+    
+    <!-- <ion-icon style="position: absolute;left:3%;font-size: 30px;top: 15%;color: #303d3d;" name="images-outline"></ion-icon> -->
+    <div class="top">
+      <ion-icon style="font-size: 30px; position: absolute; left: 5%;top: 10%; color: whitesmoke;" name="arrow-back-outline"></ion-icon>
+      <img style="width:100%;height:100%;opacity: 30%;" src="assets/bgg.jpg" >
+    </div>
+    <!-- <ion-button style="position: absolute;top: 15%;right: 5%;height: 20px;--background:rgb(224, 18, 53);"> Submit</ion-button> -->
+  <!-- <div style="position: absolute;width: 6.5%;height: 4%; border-radius: 50%; background-color:white;top: 15%;left: 1%; display: flex;justify-content: center;align-items: center;">
+    <ion-icon style="font-size: 20px;color: white;background-color: #16D6E3; border-radius: 50%;" name="add-circle-outline"></ion-icon>
+  </div> -->
+  <!-- <ion-icon style="font-size: 50px; position: absolute;top: 20%;right: 5%;color:red;" name="add-circle-outline"></ion-icon> -->
+    <div class="bottom">
+      <p style="font-size:22px;font-weight: bolder;position: absolute;top: 0%;left: 5%;color: white;">Profile</p>
+     
+      <form *ngIf="editForm==false;else loggedOut" [formGroup]="updateForm" type="text" style="width: 100%;position: absolute;top: 15%;height: 80%;">
+   
+        <ion-item><ion-input  type="text" formControlName="company_name" placeholder="Company name.."></ion-input></ion-item>
+  <ion-item><ion-input  type="text" formControlName="company_address" placeholder="Address"></ion-input></ion-item>
+  <ion-item><ion-input  type="text" formControlName="company_emaile" placeholder="Email"></ion-input></ion-item>
+  <ion-item><ion-input  type="text" formControlName="company_tel" placeholder="Telephone"></ion-input></ion-item>
+  <ion-item><ion-input  type="text" formControlName="company_website" placeholder="Website"></ion-input></ion-item>
+  <ion-textarea  type="text" formControlName="aboutus" placeholder="Description" style="border-style: solid;height: 15%;border-width: 1px;border-color: rgb(196, 190, 190);border-top: 0px;margin: 0px;"></ion-textarea>
+  <ion-item>
+    <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+  </ion-item>
+  <!-- <div *ngFor="let cartoon of cartoonsData">
+    <input type="checkbox"    (change)="onChange(cartoon.name, $event.target.checked)" />
+    {{ cartoon.name }}
+  </div> -->
+<p style="font-size:14px; font-weight: bolder;color: gray;">Select enemities</p>
+  <ion-grid>
+    <ion-row style="color: grey;margin: 5px;">
+      <ion-col *ngFor="let cartoon of cartoonsData">
+        <div style="font-size: 12px;">{{ cartoon.name }} <br>  <input type="checkbox"    (change)="onChange(cartoon.name, $event.target.checked)" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <button (click)=" submit()"> Submit</button>
+  <button (click)=" update()"> edit</button>
+  <br><br><br><br><br>
+    </form>
+    <ng-template #loggedOut>
+      <form *ngFor="let x of array"  type="text" style="width: 100%;position: absolute;top: 15%;height: 80%;">
+       
+        <ion-item>         
+           <ion-input
+              type="text"    
+              [(ngModel)]="company_name_" 
+              name="company_name_" 
+              placeholder="Company name..">
+            </ion-input>
+         </ion-item>
+        <ion-item>
+          <ion-input  
+              type="text"  
+              placeholder="Address"
+              [(ngModel)]="company_address_" 
+              name="company_address_">
+          </ion-input>
+        </ion-item>
+       <ion-item>
+         <ion-input  
+          type="text"  
+          placeholder="Email"
+          [(ngModel)]="company_emaile_" 
+          name="company_emaile_">
+       </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input  
+           type="text"  
+           placeholder="Telephone"
+           [(ngModel)]="company_tel_" 
+           name="company_tel_">
+          </ion-input>
+        </ion-item>
+     <ion-item>
+       <ion-input  
+           type="text"  
+           placeholder="Website"
+           [(ngModel)]="company_website_" 
+           name="company_website_">
+          </ion-input>
+     </ion-item>
+  <ion-textarea  
+           type="text"  
+           placeholder="Description"
+           [(ngModel)]="aboutus_" 
+           name="aboutus_" 
+           style="border-style: solid;height: 15%;border-width: 1px;border-color: rgb(196, 190, 190);border-top: 0px;margin: 0px;"></ion-textarea>
+  <ion-item>
+    <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+  </ion-item>
+  
+
+<ion-item><p style="font-size:14px; font-weight: bolder;color: gray;">Select enemities</p></ion-item>
+<ion-item>
+<ion-grid>
+    <ion-row style="color: grey;margin: 5px;">
+      <ion-col *ngFor="let xx of x.outside_features">
+        <div style="font-size: 12px;">{{ xx }} <br> 
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item> 
+
+<ion-item>
+  <button (click)=" editForms()"> Edit</button>
+  <button (click)=" editAll()"> Edit All</button>  
+</ion-item>
+
+
+  <br><br><br><br><br>
+    </form>
+
+    </ng-template>
+      
+    </div>
+  </div>
+  </ion-content>
+  <ion-footer style="position: absolute; height: 50px;bottom: 0px;background-color:  #303d3d; display: flex;justify-content: center;align-items: center;" >
+    
+    <ion-icon [routerLink]="'/profile'" style="font-size: 30px;position: absolute;right: 7%;color: grey;" name="person-outline"></ion-icon>
+    <ion-icon [routerLink]="'/favourites'" style="font-size: 30px;position: absolute;right: 45%;color: grey;" name="heart-outline"></ion-icon>
+    <ion-icon [routerLink]="'/owner-landing'" style="font-size: 30px;position: absolute;left: 7%;color: grey;" name="home-outline"></ion-icon>
+    <!-- <ion-icon [routerLink]="'/upload-space'" style="position: absolute;left:33%;font-size: 30px;color: grey;" name="add-circle-outline"></ion-icon> -->
+  </ion-footer>

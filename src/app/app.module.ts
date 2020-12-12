@@ -11,6 +11,27 @@ import { AppComponent } from './app.component';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AgmCoreModule } from '@agm/core';
 
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/firestore';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyDxB_DkempfeYitUSydU4rmbKSS8RXglno",
+  authDomain: "synergic-app.firebaseapp.com",
+  databaseURL: "https://synergic-app.firebaseio.com",
+  projectId: "synergic-app",
+  storageBucket: "synergic-app.appspot.com",
+  messagingSenderId: "65487277177",
+  appId: "1:65487277177:web:15e865dbd5be2d3e1918a8",
+  measurementId: "G-4316EVE5PJ"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// firebase.analytics();
+
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
