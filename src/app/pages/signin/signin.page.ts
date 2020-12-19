@@ -18,7 +18,7 @@ export class SigninPage implements OnInit {
   togglePassword() {
     this.showpassword = !this.showpassword;
   }
-  constructor(private formBuilder:FormBuilder, private accountService: SignInSignUpService,private router: Router,public nav: NavController,
+  constructor( public accountServices: SignInSignUpService,private formBuilder:FormBuilder, private accountService: SignInSignUpService,private router: Router,public nav: NavController,
     public loadingCtrl: LoadingController,private alertCtrl: AlertController) { }
 
   ngOnInit() {
@@ -50,11 +50,14 @@ export class SigninPage implements OnInit {
     ],
   };
   async submit() {
+    
     const loading = await this.loadingCtrl.create();
     // this.fbservice.signAuth();
     console.log(this.LoginForm.value);
     this.accountService.SignIn(this.LoginForm.value.email, this.LoginForm.value.password).then((res) => {
-      
+      this.accountServices.userGroup(this.accountServices.getUserSession(),
+      "owner",
+       this.accountServices.getEmail()) 
       // console.log(res.user);
     }).then(() => {
       loading.dismiss().then(() => {

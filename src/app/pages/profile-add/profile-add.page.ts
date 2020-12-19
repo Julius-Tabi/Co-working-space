@@ -45,11 +45,12 @@ export class ProfileAddPage implements OnInit {
   company_tel_:any;
   company_address_:any;
   editForm:boolean=false;
-
+  outside_features:any=[]
 
 
 
   amenitie:any=[];
+  amenitiesEdit:any=[]
   cartoonsData: Cartoon[] = [
     { id: 0, name: 'cameras' },
     { id: 1, name: 'guards' },
@@ -69,6 +70,7 @@ export class ProfileAddPage implements OnInit {
     if (isChecked) {
       cartoons.push(new FormControl(name));
       this.amenitie = cartoons;
+      this.amenitiesEdit.push((name));
     } else {
       const index = cartoons.controls.findIndex(x => x.value === name);
       cartoons.removeAt(index);
@@ -90,6 +92,10 @@ export class ProfileAddPage implements OnInit {
       this.social_media_=doc.data().social_media
       this.company_emaile_=doc.data().company_emaile;
       this.aboutus_=doc.data().aboutus;
+      this.outside_features=(doc.data().outside_features)
+
+
+
 
       this.useruid=doc.id
       });
@@ -165,6 +171,9 @@ public errorMessages = {
 };
 
 fileChangeEvent(fileInput: any) {
+
+
+
   this. imageError = null;
   if(fileInput.target.files && fileInput.target.files[0]){
       const max_size = 20971520;
@@ -205,6 +214,7 @@ fileChangeEvent(fileInput: any) {
         }
       reader.readAsDataURL(fileInput.target.files[0])
   }
+
 }
 
  submit() {
@@ -216,9 +226,26 @@ fileChangeEvent(fileInput: any) {
                     this.cardImageBase64,this.updateForm.value.name,this.updateForm.value.aboutus)
      }
      editForms(){
-       console.log("ready to update")
+
+      if(this.amenitiesEdit.length-1 >-1){
+      
+       this.ownerservice.editProfile(this.useruid, this.account.getUserSession(),
+       this.company_tel_,this.company_address_,this.company_website_,
+       this.company_emaile_,this.company_name_,this.amenitiesEdit,this.aboutus_
+       )
+      
+      }else{
+        this.ownerservice.editProfile(this.useruid, this.account.getUserSession(),
+        this.company_tel_,this.company_address_,this.company_website_,
+        this.company_emaile_,this.company_name_,this.outside_features,this.aboutus_)
+       }
      }
    
+     changeImage(){
+      this.ownerservice.changeImg(this.useruid, this.account.getUserSession(),this.cardImageBase64) 
+     } 
+
+
     update(){
       this.editForm = true;
     } 

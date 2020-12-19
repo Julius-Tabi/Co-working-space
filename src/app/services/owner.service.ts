@@ -68,10 +68,9 @@ export class OwnerServiceService {
         })
     ]);
   }
-  TestupdateProfile(user_uid, uid, company_tel, company_address,
-                    company_website, social_media, 
-                    company_name, img_profile, 
-                    features,company_emaile,aboutus) {
+  editProfile(user_uid, uid, company_tel, company_address,
+    company_website, company_emaile,
+    company_name, outside_features:any[], aboutus) {
     var db = firebase.firestore();
     var hotelsRef = db.collection("profiles");
     hotelsRef.doc(uid).collection("profile").doc(user_uid)
@@ -79,14 +78,23 @@ export class OwnerServiceService {
       company_address: company_address,
       company_tel: company_tel,
       company_website: company_website,
-      social_media: social_media,
+   
+      company_emaile: company_emaile,
       company_name: company_name,
       uid: uid,
       user_uid: user_uid,
-      img_profile: img_profile,
-      company_emaile:company_emaile,
-      aboutus:aboutus
-      // outside_features: features
+      outside_features: outside_features,
+      aboutus: aboutus
+     }, { merge: true })
+  }
+  changeImg(user_uid, uid, img_profile) {
+    var db = firebase.firestore();
+    var hotelsRef = db.collection("profiles");
+    hotelsRef.doc(uid).collection("profile").doc(user_uid)
+    .set({
+      uid: uid,
+      user_uid: user_uid,
+      img_profile: img_profile
      }, { merge: true })
   }
 

@@ -39,8 +39,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <button (click)=" submit()"> Submit</button>
-  <button (click)=" update()"> edit</button>
+  <ion-button (click)="submit()"  expand="full" color="danger">Submit</ion-button>
+  <ion-button (click)="update()"  expand="full" color="warning">Edit</ion-button>
   <br><br><br><br><br>
     </form>
     <ng-template #loggedOut>
@@ -94,10 +94,11 @@
            style="border-style: solid;height: 15%;border-width: 1px;border-color: rgb(196, 190, 190);border-top: 0px;margin: 0px;"></ion-textarea>
   <ion-item>
     <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+    <button (click)="changeImage()"> Change Profile</button>
   </ion-item>
   
 
-<ion-item><p style="font-size:14px; font-weight: bolder;color: gray;">Select enemities</p></ion-item>
+<ion-item><p style="font-size:14px; font-weight: bolder;color: gray;">your enemities</p></ion-item>
 <ion-item>
 <ion-grid>
     <ion-row style="color: grey;margin: 5px;">
@@ -108,15 +109,30 @@
     </ion-row>
   </ion-grid>
 </ion-item> 
+<ion-item>
+ <ion-grid>
+   <ion-row>
+    <ion-item><p style="font-size:14px; font-weight: bolder;color: gray;">update enemities</p></ion-item>
+   </ion-row>
+    <ion-row style="color: grey;margin: 5px;">
+      <ion-col *ngFor="let cartoon of cartoonsData">
+        <div style="font-size: 12px;">{{ cartoon.name }} <br>  <input type="checkbox"    (change)="onChange(cartoon.name, $event.target.checked)" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item>
 
 <ion-item>
-  <button (click)=" editForms()"> Edit</button>
-  <button (click)=" editAll()"> Edit All</button>  
+  <ion-button (click)=" editForms()"  expand="full" color="danger">Edit</ion-button>
+  <ion-button (click)=" editAll()"  expand="full" color="warning">Edit All</ion-button>
 </ion-item>
+
 
 
   <br><br><br><br><br>
     </form>
+ 
 
     </ng-template>
       
